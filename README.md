@@ -1,4 +1,4 @@
-# ansible_role_os_server
+# ansible_role_openstack_instance
 
 This is an Ansible role. This role manage instance on OpenStack environment.
 
@@ -29,13 +29,15 @@ os_instance03
 
 ## Role variables
 ```
-os_server:
+openstack_instance:
   openrc:                 
-    domain: default                                               # domain name
+    domain: default                                               # (optional) domain name (default: default)
     project: bbrfkr                                               # project name
     user: bbrfkr                                                  # user name
     password: password                                            # password
-    keystone_endpoint: "http://keystone.bbrfkr.mydns.jp:5000/v3"  # endpoint of Identity Service
+    keystone_endpoint: "http://keystone.bbrfkr.mydns.jp:5000/v3"  # endpoint of identity service
+    keystone_api_ver: 3                                           # (optional) version of identity service api (default: 3)
+    glance_api_ver: 2                                             # (optional) version of image service api (default: 2)
   image: CentOS7                                                  # image of instance
   az: nova                                                        # availability zone
   flavor: m1.small                                                # flavor of instance

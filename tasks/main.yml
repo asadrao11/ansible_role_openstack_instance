@@ -3,15 +3,15 @@
   - name: create server
     os_server:
       name: "{{ inventory_hostname }}"
-      image: "{{ os_server.image }}"
-      availability_zone: "{{ os_server.az }}"
-      flavor: "{{ os_server.flavor }}"
-      network: "{{ os_server.network }}"
-      auto_ip: "{{ os_server.attach_floating_ip }}"
+      image: "{{ openstack_instance.image }}"
+      availability_zone: "{{ openstack_instance.az }}"
+      flavor: "{{ openstack_instance.flavor }}"
+      network: "{{ openstack_instance.network }}"
+      auto_ip: "{{ openstack_instance.attach_floating_ip }}"
       delete_fip: yes
-      security_groups: "{{ os_server.security_groups }}"
-      key_name: "{{ os_server.key_pair }}"
-      state: "{{ os_server.state }}"
+      security_groups: "{{ openstack_instance.security_groups }}"
+      key_name: "{{ openstack_instance.key_pair }}"
+      state: "{{ openstack_instance.state }}"
 
   - block:
     - name: get facts of server
@@ -23,7 +23,7 @@
         host: "{{ openstack_servers.0.public_v4 }}"
         port: "{{ ansible_port | default(ansible_ssh_port) | default(22)}}"
         state: started
-    when: os_server.state == "present"
+    when: openstack_instance.state == "present"
   delegate_to: 127.0.0.1
   environment:
     OS_PROJECT_DOMAIN_NAME: "{{ OS_PROJECT_DOMAIN_NAME }}"
