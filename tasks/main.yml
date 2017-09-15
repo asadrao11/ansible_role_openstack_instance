@@ -1,6 +1,6 @@
 ---
 - block:
-  - name: create server
+  - name: manage server
     os_server:
       name: "{{ inventory_hostname }}"
       image: "{{ openstack_instance.image }}"
@@ -11,6 +11,7 @@
       delete_fip: yes
       security_groups: "{{ openstack_instance.security_groups }}"
       key_name: "{{ openstack_instance.key_pair }}"
+      meta: "{{ openstack_instance.metadata | default(omit) }}"
       state: "{{ openstack_instance.state }}"
 
   - block:

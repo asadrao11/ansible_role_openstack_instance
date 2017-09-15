@@ -47,6 +47,8 @@ openstack_instance:
     - default
     - http-https
   key_pair: key01                                                 # key pair of instance
+  metadata:                                                       # metadatas of instance
+    key: value
   state: present                                                  # state (present or absent)
 ```
 
